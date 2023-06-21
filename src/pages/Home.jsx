@@ -4,11 +4,13 @@ import FooterHome from '../components/home/FooterHome'
 import { setNameTrainer } from '../store/slices/nameTrainer.slice'
 import { useNavigate } from 'react-router-dom'
 
+
 const Home = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  localStorage.setItem('numPage', 1);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -16,7 +18,6 @@ const Home = () => {
     dispatch(setNameTrainer(nameTrainer))
     navigate("/pokedex")
   }
-
 
 
   return (

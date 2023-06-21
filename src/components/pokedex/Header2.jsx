@@ -1,16 +1,8 @@
 
-
-import { useNavigate } from "react-router-dom"
-
+import { Link } from 'react-router-dom';
 
 const Header2 = () => {
 
-
-    const navigate = useNavigate()
-
-    const handleClickLogout = () => {
-        navigate("/pokedex")
-    }
 
     return (
         <section className='relative'>
@@ -25,9 +17,11 @@ const Header2 = () => {
             {/*seccion negra */}
             <div className='bg-black h-12'></div>
 
-            {/*seccion pokeball */}
+            {/*seccion pokeball onClick={handleClickLogout}*/}
             <div className='w-20 aspect-square bg-white border-[10px] border-black rounded-full absolute -bottom-4 right-0 -translate-x-1/2 after:content-[""] after:h-11 after:aspect-square after:bg-gray-800 after:rounded-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:border-[9px] after:border-black ' >
-                <button onClick={handleClickLogout} className="absolute left-1/2 top-1/2 text-white z-20 -translate-x-1/2  -translate-y-1/2">X</button>
+                <Link to="/pokedex">
+                    <button className="absolute left-1/2 top-1/2 text-white z-20 -translate-x-1/2  -translate-y-1/2">X</button>
+                </Link>
             </div>
 
         </section >

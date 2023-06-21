@@ -9,6 +9,7 @@ const Header = () => {
 
 
     const handleClickLogout = () => {
+        localStorage.removeItem('numPage');
         dispatch(setNameTrainer(""))
     }
 

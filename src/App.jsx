@@ -9,6 +9,7 @@ import Home from './pages/Home'
 
 function App() {
 
+
   return (
     <section className=' sm:grid-cols-[1fr_auto]  mx-auto bg-white min-h-screen font-["Inter"]'>
       <Routes>

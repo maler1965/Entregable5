@@ -10,9 +10,15 @@ const Pokedex = () => {
     const [namePokemon, setNamePokemon] = useState("")
     const [types, setTypes] = useState([])
     const [currentType, setCurrentType] = useState("")
-    const [currentPage, setCurrentPage] = useState(1)
+    let newPage = localStorage.getItem('numPage');
+    const [currentPage, setCurrentPage] = useState(newPage)
 
 
+
+    localStorage.setItem('numPage', currentPage);
+    newPage = localStorage.getItem('numPage');
+    console.log(newPage)
+    console.log(currentPage)
 
     const nameTrainer = useSelector(store => store.nameTrainer)
 
@@ -52,9 +58,7 @@ const Pokedex = () => {
                 pagesInBlock.push(i)
             }
         }
-
         return { pokemonInPage, lastPage, pagesInBlock }
-
     }
 
     const { pokemonInPage, lastPage, pagesInBlock } = paginacionLogic()
@@ -75,7 +79,13 @@ const Pokedex = () => {
     }
 
     useEffect(() => {
-        setCurrentPage(1)
+        if (namePokemon !== ' ') {
+            let newPage = localStorage.getItem('numPage');
+            setCurrentPage(newPage)
+        } else {
+            setCurrentPage(1)
+        }
+
     }, [namePokemon])
 
 
@@ -87,7 +97,6 @@ const Pokedex = () => {
                 .then(({ data }) => setPokemons(data.results))
                 .catch((err) => console.log(err))
         }
-
     }, [currentType])
 
 
@@ -110,9 +119,7 @@ const Pokedex = () => {
                     setPokemons(pokemonByType)
                 })
                 .catch((err) => console.log(err))
-
         }
-
     }, [currentType])
 
 
