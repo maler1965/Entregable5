@@ -5,56 +5,54 @@ import { Link } from 'react-router-dom'
 const pokeLinearGradiendts = {
     grass: 'bg-gradient-to-t from-black to-green-500',
     fire: 'bg-gradient-to-t from-black to-red-500',
-    normal: 'bg-gradient-to-t from-black to-Lime-300',
-    fighting: 'bg-gradient-to-t from-black to-Blue-600',
-    flying: 'bg-gradient-to-t from-black to-Purple-400',
-    poison: 'bg-gradient-to-t from-black to-Rose-300',
-    ground: 'bg-gradient-to-t from-black to-Fuchsia-500',
-    rock: 'bg-gradient-to-t from-black to-Amber-700',
-    bug: 'bg-gradient-to-t from-black to-Violet-500',
-    ghost: 'bg-gradient-to-t from-black to-Blue-400',
-    steel: 'bg-gradient-to-t from-black to-Slate-200',
-    water: 'bg-gradient-to-t from-black to-Indigo-200',
-    grass: 'bg-gradient-to-t from-black to-Emerald-300',
-    electric: 'bg-gradient-to-t from-black to-Teal-200',
-    psychic: 'bg-gradient-to-t from-black to-Yellow-300',
-    ice: 'bg-gradient-to-t from-black to-Sky-200',
-    dragon: 'bg-gradient-to-t from-black to-Pink-400',
-    dark: 'bg-gradient-to-t from-black to-Purple-700',
-    fairy: 'bg-gradient-to-t from-black to-Orange-300',
-    unknown: 'bg-gradient-to-t from-black to-Fuchsia-100',
+    normal: 'bg-gradient-to-t from-black to-lime-300',
+    fighting: 'bg-gradient-to-t from-black to-blue-600',
+    flying: 'bg-gradient-to-t from-black to-purple-400',
+    poison: 'bg-gradient-to-t from-black to-rose-300',
+    ground: 'bg-gradient-to-t from-black to-fuchsia-500',
+    rock: 'bg-gradient-to-t from-black to-amber-700',
+    bug: 'bg-gradient-to-t from-black to-violet-500',
+    ghost: 'bg-gradient-to-t from-black to-blue-400',
+    steel: 'bg-gradient-to-t from-black to-slate-200',
+    water: 'bg-gradient-to-t from-black to-indigo-200',
+    grass: 'bg-gradient-to-t from-black to-emerald-300',
+    electric: 'bg-gradient-to-t from-black to-teal-200',
+    psychic: 'bg-gradient-to-t from-black to-yellow-300',
+    ice: 'bg-gradient-to-t from-black to-sky-200',
+    dragon: 'bg-gradient-to-t from-black to-pink-400',
+    dark: 'bg-gradient-to-t from-black to-purple-700',
+    fairy: 'bg-gradient-to-t from-black to-orange-300',
+    unknown: 'bg-gradient-to-t from-black to-fuchsia-100',
     shadow: 'bg-gradient-to-t from-black to-red-300',
 
-} //se tiene que poner los demas colores segun los otros tipos
+}
 
 const pokeLinearColorBorder = {
     grass: ' border-green-500 ',
     fire: 'border-red-500',
-    normal: 'border-Lime-300',
-    fighting: 'border-Blue-600',
-    flying: 'border-Purple-400',
-    poison: 'border-Rose-300',
-    ground: 'border-Fuchsia-500',
-    rock: 'border-Amber-700',
-    bug: 'border-Violet-500',
-    ghost: 'border-Blue-400',
-    steel: 'border-Slate-200',
-    water: 'border-Indigo-200',
-    grass: 'border-Emerald-300',
-    electric: 'border-Teal-200',
-    psychic: 'border-Yellow-300',
-    ice: 'border-Sky-200',
-    dragon: 'border-Pink-400',
-    dark: 'border-Purple-700',
-    fairy: 'border-Orange-300',
-    unknown: 'border-Fuchsia-100',
+    normal: 'border-lime-300',
+    fighting: 'border-blue-600',
+    flying: 'border-purple-400',
+    poison: 'border-rose-300',
+    ground: 'border-fuchsia-500',
+    rock: 'border-amber-700',
+    bug: 'border-violet-500',
+    ghost: 'border-blue-400',
+    steel: 'border-slate-200',
+    water: 'border-indigo-200',
+    grass: 'border-emerald-300',
+    electric: 'border-teal-200',
+    psychic: 'border-yellow-300',
+    ice: 'border-sky-200',
+    dragon: 'border-pink-400',
+    dark: 'border-purple-700',
+    fairy: 'border-orange-300',
+    unknown: 'border-fuchsia-100',
     shadow: 'border-red-300',
-} //se tiene que poner los demas colores segun los otros tipos
+}
 
 
 const PokemonCard = ({ pokemonUrl }) => {
-    //
-    // console.log('card  ', pokemonUrl)
 
     const [pokemon, setPokemon] = useState(null)
 
@@ -63,9 +61,7 @@ const PokemonCard = ({ pokemonUrl }) => {
         const titleTypes = nameTypes.join(" / ")
         return titleTypes
     }
-    /* */
 
-    //console.log('card  ', pokemon)
 
     useEffect(() => {
         axios.get(pokemonUrl)
@@ -73,12 +69,11 @@ const PokemonCard = ({ pokemonUrl }) => {
             .catch((err) => console.log(err))
     }, [])
 
-    console.log('color  ', pokemon)
 
-    //bg-gray-300
     return (
-        <Link to={`/pokedex/${pokemon?.name}`} > {/*aqui se hace lo mismo con los bordes, igual que los colores del fondo */}
+        <Link to={`/pokedex/${pokemon?.name}`} >
 
+            {/*aqui se hace lo mismo con los bordes, igual que los colores del fondo */}
             <div className={`p-1 border-4 mt-6 rounded-md bg-gray-300 ${pokeLinearColorBorder[pokemon?.types[0].type.name]}`} >
 
 
@@ -88,6 +83,7 @@ const PokemonCard = ({ pokemonUrl }) => {
                         <img src={pokemon?.sprites.other['official-artwork'].front_default} alt={pokemon?.name} />
                     </div>
                 </section>
+
 
                 {/*seccion inferior */}
                 <section >

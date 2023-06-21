@@ -14,14 +14,11 @@ const Pokedex = () => {
     const [currentType, setCurrentType] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
 
-    console.log('tipo  ', types)
 
     const nameTrainer = useSelector(store => store.nameTrainer)
 
     const pokemonsByName = pokemons.filter((pokemon) => pokemon?.name.includes(namePokemon.toLowerCase().trim()))
-    //console.log('busca1 ', pokemons[0].name)
-    //const pokemonsByName = pokemons.filter((pokemon) => pokemon?.name.includes(namePokemon?.toLowerCase().trim()))  //trim() elimina los espacios
-    // console.log('busca2 ', { pokemonsByName })
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -31,7 +28,7 @@ const Pokedex = () => {
 
     const handleChangeType = (e) => {
         setCurrentType(e.target.value)
-    } /*  */
+    }
 
     const paginacionLogic = () => {
         const POKEMONS_PER_PAGE = 12
@@ -62,9 +59,7 @@ const Pokedex = () => {
     }
 
     const { pokemonInPage, lastPage, pagesInBlock } = paginacionLogic()
-    console.log('1  ', pokemonInPage)
-    console.log('2 ', lastPage)
-    console.log('3 ', pagesInBlock)
+
 
     const handleClickPreviusPage = () => {
         const newCurrentPage = currentPage - 1
@@ -96,7 +91,7 @@ const Pokedex = () => {
 
     }, [currentType])
 
-    /* */
+
     useEffect(() => {
         const URL = 'https://pokeapi.co/api/v2/type'
 
@@ -121,7 +116,6 @@ const Pokedex = () => {
 
     }, [currentType])
 
-    //types.map((type) => <option value={type?.name} key={type.url} >{type?.name} </option>)
 
 
     return (
