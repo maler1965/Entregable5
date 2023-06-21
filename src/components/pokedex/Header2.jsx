@@ -1,15 +1,15 @@
-import { useDispatch } from "react-redux"
-import { setNameTrainer } from "../../store/slices/nameTrainer.slice"
 
 
+import { useNavigate } from "react-router-dom"
 
-const Header = () => {
 
-    const dispatch = useDispatch()
+const Header2 = () => {
 
+
+    const navigate = useNavigate()
 
     const handleClickLogout = () => {
-        dispatch(setNameTrainer(""))
+        navigate("/pokedex")
     }
 
     return (
@@ -34,4 +34,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header2

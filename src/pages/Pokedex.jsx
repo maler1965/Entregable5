@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-
 import Header from "../components/pokedex/Header"
 import PokemonsList from "../components/pokedex/PokemonsList"
 
@@ -12,6 +11,7 @@ const Pokedex = () => {
     const [types, setTypes] = useState([])
     const [currentType, setCurrentType] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
+
 
 
     const nameTrainer = useSelector(store => store.nameTrainer)
@@ -125,7 +125,7 @@ const Pokedex = () => {
 
 
             <form onSubmit={handleSubmit}  >
-                <div className=" flex gap-2 justify-center" >
+                <div className=" flex gap-2  p-2 justify-center" >
                     <div className="px-4" >
                         <input className="text-black bg-white border border-black text-sm outline-none p-2" id="namePokemon" placeholder="Write a name of Pokemon..." type="text" />
                         <button className="bg-red-500  hover:bg-red-300 text-sm p-2 px-5 border border-green-700 ">Search</button>
@@ -143,7 +143,7 @@ const Pokedex = () => {
 
             </form>
 
-            <section className="bg-gray-100 min-h-screen text-black">
+            <section className="bg-gray-100 min-h-screen overflow-x-hidden text-black">
                 {/* lista de pokemon */}
                 <PokemonsList pokemons={pokemonInPage} />
             </section>

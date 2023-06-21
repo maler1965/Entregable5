@@ -70,17 +70,17 @@ const PokemonCard = ({ pokemonUrl }) => {
             .catch((err) => console.log(err))
     }, [])
 
-
+    //grid gap-8 grid-cols-[repeat(auto-fill,_280px)] justify-center max-w-[1024px] mx-auto py-6
     return (
         <Link to={`/pokedex/${pokemon?.name}`} >
 
             {/*aqui se hace lo mismo con los bordes, igual que los colores del fondo */}
-            <div className={`p-1 border-4 mt-6 rounded-md bg-gray-300 ${pokeLinearColorBorder[pokemon?.types[0].type.name]}`} >
+            <div className={`p-1 w-[min(100%, 320px)] border-4 mt-6 overflow-x-hidden rounded-md bg-gray-300 ${pokeLinearColorBorder[pokemon?.types[0].type.name]}`} >
 
 
                 {/*seccion superior */}
                 <section className={` relative h-40 ${pokeLinearGradiendts[pokemon?.types[0].type.name]}`}>
-                    <div className='absolute px-12 -bottom-14'>
+                    <div className='absolute  px-12 -bottom-14'>
                         <img src={pokemon?.sprites.other['official-artwork'].front_default} alt={pokemon?.name} />
                     </div>
                 </section>
@@ -89,7 +89,7 @@ const PokemonCard = ({ pokemonUrl }) => {
                 {/*seccion inferior */}
                 <section >
                     <div className='text-center'>
-                        <h3 className='text-[30px] mt-14'>{pokemon?.name} </h3>
+                        <h3 className='text-[30px] truncate mt-14'>{pokemon?.name} </h3>
                         <h5 className='text-[18px] '>{formatTypesPokemon(pokemon?.types)} </h5>
                         <span className='p-2'>type</span>
                     </div>

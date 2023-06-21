@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/pokedex/Header'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import Header2 from '../components/pokedex/Header2'
 
 const PokemonId = () => {
     const [pokemon, setPokemon] = useState(null)
     const { pokemonName } = useParams()
 
-    console.log('detalle 1 ', pokemonName)
-    console.log('detalle 2 ', pokemon)
+    //console.log('detalle 1 ', pokemonName)
+    // console.log('detalle 2 ', pokemon)
 
     const porcentProgresStat = (baseStat) => {
         const STAT_MAX = 255
@@ -52,13 +52,13 @@ const PokemonId = () => {
 
 
     return (
-        <main>
-            <Header />
+        <main >
+            <Header2 />
 
             <section className='z-0  justify-center max-w-[1024px] mx-auto py-8'>
                 {/* informacion detalle de pokemon      */}
 
-                <article>
+                <article className=' bg-zinc-100 ' >
                     {/* */}
                     <section className={`flex justify-center relative rounded-md mt-[62px] p-2 h-[140px] ${pokeLinearGradiendts[pokemon?.types[0].type.name]}`}>
                         <div className='absolute   px-12 -top-14'>
@@ -124,7 +124,7 @@ const PokemonId = () => {
                 </article>
 
 
-                <article className='px-2' >
+                <article className='bg-zinc-100 pb-2 px-2' >
 
 
                     {/* Stats */}
