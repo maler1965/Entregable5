@@ -6,7 +6,6 @@ import Header from "../components/pokedex/Header"
 import PokemonsList from "../components/pokedex/PokemonsList"
 
 
-
 const Pokedex = () => {
     const [pokemons, setPokemons] = useState([])
     const [namePokemon, setNamePokemon] = useState("")

@@ -27,6 +27,7 @@ const pokeLinearGradiendts = {
 
 }
 
+
 const pokeLinearColorBorder = {
     grass: ' border-green-500 ',
     fire: 'border-red-500',

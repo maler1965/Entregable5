@@ -8,19 +8,16 @@ const Home = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  //console.log('form  ')
+
 
   const handleSubmit = (e) => {
-    //  console.log('form1  ')
     e.preventDefault()
     const nameTrainer = e.target.nameTrainer.value
-    // console.log('form2  ', nameTrainer)
     dispatch(setNameTrainer(nameTrainer))
     navigate("/pokedex")
   }
 
 
-  //
 
   return (
     <main className='grid grid-rows-[1fr_auto] min-h-screen'>
