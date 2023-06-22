@@ -1,15 +1,26 @@
 import { useDispatch } from "react-redux"
 import { setNameTrainer } from "../../store/slices/nameTrainer.slice"
+import { useNavigate } from 'react-router-dom'
 
 
 
 const Header = () => {
 
-    const dispatch = useDispatch()
 
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+
+
+
+
+    const handleClickConfig = () => {
+        navigate("/config")
+    }
 
     const handleClickLogout = () => {
-        localStorage.removeItem('numPage');
+        // localStorage.removeItem('numPage');
         dispatch(setNameTrainer(""))
     }
 
@@ -24,7 +35,12 @@ const Header = () => {
             </div>
 
             {/*seccion negra */}
-            <div className='bg-black h-12'></div>
+            <div className='bg-black h-12'>
+                <div className="flex p-2">
+                    <button onClick={handleClickConfig} className="text-white font-bold p-2 px-4"> Settings</button>
+                </div>
+            </div>
+
 
             {/*seccion pokeball */}
             <div className='w-20 aspect-square bg-white border-[10px] border-black rounded-full absolute -bottom-4 right-0 -translate-x-1/2 after:content-[""] after:h-11 after:aspect-square after:bg-gray-800 after:rounded-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:border-[9px] after:border-black ' >

@@ -5,6 +5,7 @@ import ProtectedRoutes from './components/auth/ProtectedRoutes'
 import Pokedex from './pages/Pokedex'
 import PokemonId from './pages/PokemonId'
 import Home from './pages/Home'
+import Config from './pages/Config'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path='/pokedex' element={<Pokedex />} />
           <Route path='/pokedex/:pokemonName' element={<PokemonId />} />
+          <Route path='/config' element={<Config />} />
         </Route>
       </Routes>
     </section>
