@@ -5,7 +5,8 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 const ProtectedRoutes = () => {
 
-    const nameTrainer = useSelector((store) => store.nameTrainer)
+
+    const { nameTrainer } = useSelector((state) => state.darkSlice);
 
     if (nameTrainer) {
         return <Outlet />

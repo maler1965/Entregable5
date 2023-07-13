@@ -11,6 +11,9 @@ import Config from './pages/Config'
 function App() {
 
 
+  localStorage.setItem('pokemonType', []);
+  
+
   return (
     <section className=' sm:grid-cols-[1fr_auto]  mx-auto bg-white min-h-screen font-["Inter"]'>
       <Routes>

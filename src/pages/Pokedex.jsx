@@ -7,56 +7,62 @@ import PokemonsList from "../components/pokedex/PokemonsList"
 
 const Pokedex = () => {
 
+
     const [pokemons, setPokemons] = useState([])
     const [namePokemon, setNamePokemon] = useState("")
     const [types, setTypes] = useState([])
     const [currentType, setCurrentType] = useState("")
+    
 
     let newPage = parseInt(localStorage.getItem("numPage"), 10)
+    console.log('#1 en numPage', { newPage })
     const [currentPage, setCurrentPage] = useState(newPage)
+    console.log('#1 de currentPage', { currentPage })
 
-    let changeModoDark = localStorage.getItem('modoDark');
-    const [darkMode, setDarkMode] = useState(changeModoDark)
+    let changeModoDark = localStorage.getItem('darkMode');
+    
 
-    //const [first, setfirst] = useState(second)
+    const { nameTrainer } = useSelector(store => store.darkSlice)
 
 
-    //console.log('numero page ', currentPage)
-    // console.log('numero bodega ', newPage)
-
-    const nameTrainer = useSelector(store => store.nameTrainer)
-
-    const pokemonsByName = pokemons.filter((pokemon) => pokemon?.name.includes(namePokemon.toLowerCase().trim()))
+    const pokemonsByName = pokemons.filter((pokemon) => pokemon?.name.includes(namePokemon.toLowerCase().trim())) //filter si puede trabajar con un array vacio  // en includes cuando esta vacio "" y lo compara con cualquier string lo concidera true por eso lo deja pasar, asi cuando el input esta vacio deja pasar todos
     localStorage.setItem('numPage', currentPage);
+    console.log('#2 en numPage ', { currentPage })
+    console.log('#1 en filter ', { pokemonsByName })
+   
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        setNamePokemon(e.target.namePokemon.value)
+        e.preventDefault();
+        setCurrentPage(1)
+        setCurrentType("")
+        const namePokemonValue = e.target.namePokemonDesktop.value || e.target.namePokemonMobile.value;   
+        setNamePokemon(namePokemonValue);
     }
+
 
 
     const handleChangeType = (e) => {
-        setCurrentType(e.target.value)
+        setNamePokemon("")
+        setCurrentPage(1)
+        setCurrentType(e.target.value)      
     }
 
     let endNumPokemon = parseInt(localStorage.getItem("totalPokemon"), 10)
-    //let endNumPokemon = localStorage.getItem('totalPokemon');
+    
 
     const paginacionLogic = () => {
         const POKEMONS_PER_PAGE = endNumPokemon
-        //pokemon que se van a mostrar en la pagina actual
+        
         const sliceStart = (currentPage - 1) * POKEMONS_PER_PAGE
         const sliceEnd = sliceStart + POKEMONS_PER_PAGE
         const pokemonInPage = pokemonsByName.slice(sliceStart, sliceEnd)
 
-        //ultima pagina
+       
         const lastPage = Math.ceil(pokemonsByName.length / POKEMONS_PER_PAGE) || 1
 
-        //bloque actual
         const PAGES_PER_BLOCK = 5
         const actualBlock = Math.ceil(currentPage / PAGES_PER_BLOCK)
 
-        //Paginas que se mostraran en el bloque actual
         const pagesInBlock = []
         const minPage = (actualBlock - 1) * PAGES_PER_BLOCK + 1
         const maxPage = actualBlock * PAGES_PER_BLOCK
@@ -88,9 +94,7 @@ const Pokedex = () => {
     useEffect(() => {
         if (namePokemon !== ' ') {
             let newPage = parseInt(localStorage.getItem("numPage"), 10)
-            //let newPage = localStorage.getItem('numPage');
             setCurrentPage(newPage)
-
         } else {
             setCurrentPage(1)
         }
@@ -98,15 +102,17 @@ const Pokedex = () => {
     }, [namePokemon])
 
 
+
     useEffect(() => {
-        if (!currentType) {
+        if (!currentType) {  
             const URL = 'https://pokeapi.co/api/v2/pokemon?limit=1281'
 
             axios.get(URL)
                 .then(({ data }) => setPokemons(data.results))
                 .catch((err) => console.log(err))
         }
-    }, [currentType])
+        
+    }, [currentType])  
 
 
     useEffect(() => {
@@ -125,39 +131,66 @@ const Pokedex = () => {
             axios.get(URL)
                 .then(({ data }) => {
                     const pokemonByType = data.pokemon.map(pokemon => pokemon.pokemon)
+                    localStorage.setItem('pokemonType', pokemonByType);
+                    console.log({ pokemonByType })
                     setPokemons(pokemonByType)
                 })
                 .catch((err) => console.log(err))
         }
     }, [currentType])
 
-    //console.log('array para map  ', pagesInBlock)
-    console.log('modo dark  ', darkMode)
-    //
+   
 
     return (
         <main>
+
             <Header />
 
-            <div className={` ${darkMode === 'true' ? "bg-white " : " bg-blue-400 "} `} >
+            <div className={` ${changeModoDark === true ? "bg-white " : " bg-blue-400 "} `} >
 
                 <p className="p-4 text-[20px]"> <span className="text-red-500 text-[20px] font-bold">Welcome {nameTrainer} </span> , her you can find your favorite Pokemon</p>
 
                 <form onSubmit={handleSubmit}  >
-                    <div className=" flex gap-2  p-2 justify-center" >
-                        <div className="px-4" >
-                            <input className="text-black bg-white border border-black text-sm outline-none p-2" id="namePokemon" placeholder="Write a name of Pokemon..." type="text" />
-                            <button className="bg-red-500  hover:bg-red-300 text-sm p-2 px-5 border border-green-700 ">Search</button>
+
+                    <div className='    block md:hidden'>
+                        <div className=" flex-col gap-2 text-center p-2 items-center" >
+
+                            <div className="px-4" >
+                                <input className="text-black bg-white border border-black m-1 text-sm outline-none p-2"  id="namePokemonDesktop" placeholder="Write a name of Pokemon..." type="text" />
+                                <button className="bg-red-500  hover:bg-red-300 text-sm  m-1 p-2 px-5 border border-green-700 ">Search</button>
+                            </div>
+                            {/**/}
+                            <select className="p-2  m-1 border border-green-700" onChange={handleChangeType} >
+                                <option value="">All types of Pokemon</option>
+
+                                {
+                                    types.map((type) => <option value={type.name} key={type.url} > {type.name} </option>)
+                                }
+
+                            </select>
+
                         </div>
+                    </div>
 
-                        <select className="p-2 border border-green-700" onChange={handleChangeType} >
-                            <option value="">All types of Pokemon</option>
 
-                            {
-                                types.map((type) => <option value={type.name} key={type.url} > {type.name} </option>)
-                            }
+                    <div className='  hidden md:block'>
+                        <div className=" flex  gap-2  p-2 justify-center" >
 
-                        </select>
+                            <div className="px-4" >
+                                <input className="text-black bg-white border border-black text-sm outline-none p-2"  id="namePokemonMobile" placeholder="Write a name of Pokemon..." type="text" />
+                                <button className="bg-red-500  hover:bg-red-300 text-sm p-2 px-5 border border-green-700 ">Search</button>
+                            </div>
+                            {/**/}
+                            <select className="p-2 border border-green-700" onChange={handleChangeType} >
+                                <option value="">All types of Pokemon</option>
+
+                                {
+                                    types.map((type) => <option value={type.name} key={type.url} > {type.name} </option>)
+                                }
+
+                            </select>
+
+                        </div>
                     </div>
 
                 </form>
@@ -169,6 +202,7 @@ const Pokedex = () => {
             <div >
                 <section className="bg-gray-100 min-h-screen overflow-x-hidden text-black">
                     {/* lista de pokemon */}
+                    
                     <PokemonsList pokemons={pokemonInPage} />
                 </section>
             </div>
@@ -176,7 +210,7 @@ const Pokedex = () => {
 
 
             {/* Paginacion cursor-pointer " bg-blue-400"   */}
-            <div className={` ${darkMode === 'true' ? "bg-white " : " bg-blue-400 "} `}  >
+            <div className={` ${changeModoDark === true ? "bg-white " : " bg-blue-400 "} `}  >
 
                 <ul className="flex gap-3 justify-center py-4 px-2 flex-wrap ">
 

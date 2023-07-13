@@ -6,8 +6,8 @@ const NUMBERPOKEMONS = [4, 8, 12, 16, 20]
 
 const Config = () => {
 
-    let changeModoDark = localStorage.getItem('modoDark');
-    const [darkMode] = useState(changeModoDark)
+    let changeModoDark = localStorage.getItem('darkMode');
+    
 
     const [numPokemons, setNumPokemons] = useState(12)
 
@@ -15,11 +15,10 @@ const Config = () => {
         setNumPokemons(e.target.value)
     }
 
-    console.log(numPokemons)
     localStorage.setItem('totalPokemon', numPokemons);
 
     return (
-        <div className={` ${darkMode === 'true' ? "bg-white " : " bg-blue-400 min-h-screen "} `} >
+        <div className={` ${changeModoDark === true ? "bg-white " : " bg-blue-400 min-h-screen "} `} >
             <Header2 />
 
             <section className='bg-blue-300'>

@@ -1,18 +1,13 @@
 import { useDispatch } from "react-redux"
-import { setNameTrainer } from "../../store/slices/nameTrainer.slice"
 import { useNavigate } from 'react-router-dom'
-
+import { setNameTrainer } from "../../store/slices/dark.slice"
 
 
 const Header = () => {
 
 
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-
-
 
 
     const handleClickConfig = () => {
@@ -20,7 +15,7 @@ const Header = () => {
     }
 
     const handleClickLogout = () => {
-        // localStorage.removeItem('numPage');
+        localStorage.removeItem('numPage');
         dispatch(setNameTrainer(""))
     }
 

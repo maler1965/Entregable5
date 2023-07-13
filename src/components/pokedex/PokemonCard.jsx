@@ -55,6 +55,8 @@ const pokeLinearColorBorder = {
 
 const PokemonCard = ({ pokemonUrl }) => {
 
+    
+
     const [pokemon, setPokemon] = useState(null)
 
     const formatTypesPokemon = (types = []) => {
@@ -70,7 +72,7 @@ const PokemonCard = ({ pokemonUrl }) => {
             .catch((err) => console.log(err))
     }, [])
 
-    //grid gap-8 grid-cols-[repeat(auto-fill,_280px)] justify-center max-w-[1024px] mx-auto py-6
+    
     return (
         <Link to={`/pokedex/${pokemon?.name}`} >
 

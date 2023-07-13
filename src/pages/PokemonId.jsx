@@ -7,8 +7,6 @@ const PokemonId = () => {
     const [pokemon, setPokemon] = useState(null)
     const { pokemonName } = useParams()
 
-    //console.log('detalle 1 ', pokemonName)
-    // console.log('detalle 2 ', pokemon)
 
     const porcentProgresStat = (baseStat) => {
         const STAT_MAX = 255
@@ -53,20 +51,22 @@ const PokemonId = () => {
 
     return (
         <main >
+
+            
             <Header2 />
 
             <section className='z-0  justify-center max-w-[1024px] mx-auto py-8'>
                 {/* informacion detalle de pokemon      */}
 
                 <article className=' bg-zinc-100 ' >
-                    {/* */}
+                    
                     <section className={`flex justify-center relative rounded-md mt-[62px] p-2 h-[140px] ${pokeLinearGradiendts[pokemon?.types[0].type.name]}`}>
                         <div className='absolute   px-12 -top-14'>
                             <img src={pokemon?.sprites.other['official-artwork'].front_default} alt={pokemon?.name} className="w-[200px] h-[200px] " />
                         </div>
                     </section>
 
-
+                    
                     <section>
 
                         <div className='flex justify-center  '>
@@ -91,10 +91,11 @@ const PokemonId = () => {
                             </div>
                         </div>
 
-                        {/*   detalles */}
+                       
 
                         <section className=' p-4  flex justify-evenly '>
-                            {/**/}
+                            
+
                             <div className=' p-2 flex-col justify-center'>
                                 <label className=' px-4 pb-4 text-[20px] font-bold flex justify-center'>Types</label>
                                 <div className=' px-4 flex justify-evenly'>
@@ -103,14 +104,29 @@ const PokemonId = () => {
                                 </div>
                             </div>
 
-
+ 
                             <div className=' p-2 flex-col justify-center' >
+
                                 <label className=' px-4 pb-4 text-[20px] font-bold flex justify-center'>Abilities</label>
-                                <div className=' px-4 flex justify-evenly'>
+                               
+                         
+                                <div className='  block md:hidden'   >
+                                <div className=' px-2  '>
+                                    {pokemon?.abilities[0] && <div className='rounded-md border bg-green-400 border-black m-2 font-bold h-auto p-2'>{pokemon.abilities[0].ability.name}</div>}
+                                    {pokemon?.abilities[1] && <div className='rounded-md border bg-blue-400 border-black m-2 font-bold h-auto p-2'>{pokemon.abilities[1].ability.name}</div>}
+                                </div>
+                                </div>
+
+                                <div className='  hidden md:block'>
+                                <div className='flex justify-evenly px-2'>
                                     {pokemon?.abilities[0] && <div className='rounded-md border bg-green-400 border-black mx-4 font-bold h-auto p-2'>{pokemon.abilities[0].ability.name}</div>}
                                     {pokemon?.abilities[1] && <div className='rounded-md border bg-blue-400 border-black mx-4 font-bold h-auto p-2'>{pokemon.abilities[1].ability.name}</div>}
                                 </div>
+                                </div>
+
+
                             </div>
+
 
                         </section>
 
@@ -118,10 +134,8 @@ const PokemonId = () => {
                     </section>
 
 
-
-
-
                 </article>
+
 
 
                 <article className='bg-zinc-100 pb-2 px-2' >
